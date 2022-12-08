@@ -1,0 +1,145 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct dlln{
+        int v;
+        struct dlln *prev,*next;
+};
+struct dlln *createnode(int v)
+{
+        struct dlln *h;
+        h=(struct dlln*)malloc(sizeof(struct dlln));
+        h->v=v;
+        h->prev=NULL;
+        h->next=NULL;
+        return h;
+}
+struct dlln *createlist(int n)
+{
+        struct dlln *h=NULL,*nn,*t;
+        int i,v;
+        //nn=(struct dlln*)malloc(sizeof(struct dlln));
+        for(i=0;i<n;i++)
+        {
+                printf("enter value\n");
+                scanf("%d",&v);
+                nn=createnode(v);
+                if(h==NULL)
+                {
+                        h=nn;
+                }
+                }
+                else
+                {
+                        t->next=nn;
+                        nn->prev=t;
+                }
+                t=nn;
+        }
+        return h;
+}
+void print(struct dlln *h)
+{
+        while(h!=NULL)
+        {
+                printf("%d->",h->v);
+                h=h->next;
+        }
+}
+struct dlln *insert(struct dlln *h,int pos,struct dlln *nn )
+{
+        struct dlln *t=h;
+        int i;
+        for(i=1;i<pos-1;i++)
+        {
+                t=t->next;
+        }
+        nn->next=t->next;
+        t->next->prev=nn;
+        t->next=nn;
+        nn->prev=t;
+        return h;
+}
+int len(struct dlln *h)
+{
+        int c=0;
+        while(h!=NULL)
+        {
+                c++;
+                h=h->next;
+        }
+        return c;
+}
+struct dlln *rev(struct dlln *h)
+{
+        int i;
+        struct dlln *n=NULL,*p=NULL,*temp=h;
+        while(temp!=NULL)
+        {
+                n=temp->next;
+                temp->next=p;
+                p=temp;
+                temp=n;
+        }
+        h=p;
+         return h;
+}
+struct dlln *del(struct dlln *h,int pos)
+{
+        struct dlln *t,*temp=h;
+        int i;
+        for(i=0;i<pos-1;i++)
+        {
+                temp=temp->next;
+        }
+        temp->prev->next=temp->next;
+        temp->next->prev=temp->prev;
+        free(temp);
+        return h;
+}
+void swap(int n1,int n2)
+{
+        int t;
+        t=(n1);
+        (n1)=(n2);
+        (n2)=t;
+}
+struct dlln *rev1(struct dlln *h)
+{
+        struct dlln *f=h;
+        struct dlln *l=h;
+        int n=len(h);
+        while(l->next!=NULL)
+        {
+                l=l->next;
+
+        }
+        printf("%d",l->v);
+        for(int i=0;i<n/2;i++)
+        {
+                int t=f->v;
+                f->v=l->v;
+                l->v=t;
+                f=f->next;
+                l=l->prev;
+        }
+        return h;
+
+}
+
+
+
+
+int main()
+{
+        struct dlln *h,*h1,*nn;
+        int n,v;
+        printf("enter no. of values\n");
+        scanf("%d",&n);
+        h=createlist(n);
+        //nn=createnode(2);
+        //h1=del(h,2);
+        print(rev1(h));
+        //printf("%d",len(h));
+}
+        
+        
