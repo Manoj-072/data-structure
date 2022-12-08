@@ -1,0 +1,135 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct polyn{
+        int e;
+        int v;
+        struct polyn *next;
+};
+struct polyn *createvar(int ep,int va)
+{
+        struct polyn *h;
+        h=(struct polyn*)malloc(sizeof(struct polyn));
+        h->e=ep;
+        h->v=va;
+        h->next=NULL;
+        return h;
+}
+struct polyn *createpol(int n)
+
+{
+        struct polyn *h=NULL,*t,*nn;
+        int e,v,i;
+        printf("enter the expo and val\n");
+        for(i=0;i<n;i++)
+        {
+                printf("enter v and e\n");
+                scanf("%d %d",&v,&e);
+                nn=createvar(e,v);
+                if(h==NULL)
+                {
+                   h=nn;
+                }
+                else
+                {
+                        t->next=nn;
+                }
+                t=nn;
+        }
+        return h;
+}
+struct polyn *addpoly(struct polyn *h1,struct polyn *h2)
+{
+        struct polyn *t=NULL,*l,*nn;
+        if (h1==NULL)
+                return h2;
+        if (h2==NULL)
+                return h2;
+        while(h1 && h2)
+        {
+                if(h1->e==h2->e)
+                {
+                        nn=createvar(h1->e,h1->v+h2->v);
+                        h1=h1->next;
+                        h2=h2->next;
+                }
+                else if(h1->e>h2->e)
+                {
+                        nn=createvar(h1->e,h1->v);
+                      h1=h1->next;
+                }
+                else
+                {
+                        nn=createvar(h2->e,h2->v);
+                        h2=h2->next;
+                }
+                if(t==NULL)
+                {
+                        t=nn;
+                }
+                else{
+                        l->next=nn;
+                }
+                l=nn;
+        }
+        if(!h1)
+                l->next=h2;
+        else
+                l->next=h1;
+        return t;
+}
+struct polyn *mulpoly(struct polyn *h1,struct polyn *h2)
+{
+        int e,v;
+        struct polyn *t,*l=NULL,*temp,*nn;
+        while(h1!=NULL)
+        {
+                t=h2;
+             while(t!=NULL)
+                {
+                        e=(h1->e)+(t->e);
+                        v=(h1->v)*(t->v);
+                        nn=createvar(e,v);
+                        if(l==NULL)
+                        {
+                                l=nn;
+                        }
+                        else
+                                temp->next=nn;
+                        temp=nn;
+                        t=t->next;
+                }
+                h1=h1->next;
+        }
+        return l;
+}
+
+
+
+
+void print(struct polyn *h)
+{
+        while(h!=NULL)
+        {
+                printf("%dx^%d +",h->v,h->e);
+                h=h->next;
+        }
+ printf("\n");
+}
+int main()
+{
+        struct polyn *h1,*h2,*h;
+        int n,n1;
+        printf("enter the no. of variables\n");
+        scanf("%d",&n);
+        h1=createpol(n);
+        printf("enter the no.of variables 2\n");
+        scanf("%d",&n1);
+        h2=createpol(n1);
+        print(h1);
+        print(h2);
+        h=mulpoly(h1,h2);
+        print(h);
+}
+
+
+
