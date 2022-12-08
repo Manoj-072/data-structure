@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct clln{
+        int v;
+        struct clln *next;
+};
+struct clln *createnode(int val)
+{
+
+        struct clln *h;
+        h=(struct clln*)malloc(sizeof(struct clln));
+        h->v=val;
+        h->next=NULL;
+        return h;
+}
+struct clln *createlist(int n)
+{
+        struct clln *nn,*h=NULL,*t;
+        int v,i;
+        for(i=0;i<n;i++)
+        {
+                printf("enter value\n");
+                scanf("%d",&v);
+                nn=createnode(v);
+                if(h==NULL)
+                {
+                        h=nn;
+                }
+                else{
+                        t->next=nn;
+                }
+                t=nn;
+        }
+        t->next=h;
+        return h;
+}
+void print(struct clln *h)
+{
+
+        struct clln *temp=h;
+
+        printf("%d->",h->v);
+        h=h->next;
+        while(h!=temp)
+        {
+                printf("%d->",h->v);
+                h=h->next;
+        }
+}
+struct clln *last(struct clln *h)
+{
+        struct clln *temp=h;
+        h=h->next;
+        while(h->next!=temp)
+        {
+                h=h->next;
+        }
+        return h;
+}
+
+
+struct clln *insertb(struct clln *h,struct clln *nn)
+{
+        struct clln *t;
+        t=last(h);
+        nn->next=t->next;
+        t->next=nn;
+        return nn;
+}
+struct clln *insertl(struct clln *h,struct clln *nn)
+{
+        struct clln *t;
+        t=last(h);
+        nn->next=t->next;
+        t->next=nn;
+        return h;
+}
+
+
+
+int main()
+{
+        struct clln *h,*nn,*h1;
+        int n;
+        printf("enter value of n\n ");
+        scanf("%d",&n);
+        h=createlist(n);
+        nn=createnode(8);
+        h1=insertl(h,nn);
+
+        print(h1);
+}
