@@ -1,0 +1,221 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct slln *insort(struct slln *h);
+struct slln *insert(struct slln *h,int pos,struct slln *nn);
+struct slln *sort(struct slln *h);
+int search(struct slln *h,int val);
+struct slln *deldup(struct slln *h);
+struct slln *delv(struct slln *h,int val);
+struct slln *dele(struct slln *h,int pos);
+struct slln *createnode(int v);
+struct slln *createlist(int n);
+void print(struct slln *h);
+struct slln{
+        int v;
+
+        struct slln *next;
+};
+int sear(struct slln *h,int val)
+{
+        int flag;
+        while(h!=NULL)
+        {
+                if(h->v==val)
+                {
+                        flag=1;
+                        break;
+                }
+                else{
+                        flag=0;
+}
+                h=h->next;
+        }
+        return flag;
+}
+struct slln *createnode(int v)
+{
+    struct slln *h;
+    h=(struct slln*)malloc(sizeof(struct slln));
+    h->v=v;
+    h->next=NULL;
+    return h;
+
+}
+struct slln *createlist(int n)
+{
+        struct slln *t=NULL,*nn,*tail;
+        int v,i;
+        for(i=0;i<n;i++)
+        {
+                printf("enter the value\n");
+                scanf("%d",&v);
+                nn=createnode(v);
+                if(t==NULL)
+                {
+                        t=nn;
+                }
+                else{
+                        tail->next=nn;
+ }
+                tail=nn;
+        }
+        return t;
+}
+void print(struct slln *h)
+{
+        while(h!=NULL)
+        {
+                printf("%d->",h->v);
+                h=h->next;
+        }
+}
+int len(struct slln *h)
+{
+        int c=0;
+        while(h!=NULL)
+        {
+                c++;
+                h=h->next;
+        }
+        return c;
+}
+
+struct slln *dele(struct slln *h,int pos)
+{
+        int l,i;
+        struct slln *c,*p=h;
+        l=len(h);
+   for(i=1;i<pos-1;i++)
+        {
+                p=p->next;
+        }
+        c=p->next;
+        p->next=c->next;
+        free(c);
+        return h;
+}
+struct slln *delv(struct slln *h, int val)                                                            73,1          32%
+{- INSERT --                                                                                          74,1          32%
+-- INSERstruct slln *temp=h;                                                                          75,1          33%
+        int  pos=1,flag=0;
+        while(h!=NULL)
+        {
+                if(temp->v==val)
+                {
+                        flag=1;
+                        return dele(h,pos);
+                }
+                pos=pos+1;
+                temp=temp->next;
+        }
+        if (flag==0)
+                printf("element not found\n");
+}
+struct slln *deldup(struct slln *h)
+{
+        struct slln *t,*nn,*temp;
+        int v;
+        v=h->v;
+        nn=createnode(v);
+        t=nn;
+        temp=t;
+        h=h->next;
+        while(h!=NULL)
+        {
+                v=h->v;
+                if(sear(t,v)==0)
+                {
+                        nn=createnode(v);
+                        t->next=nn;
+                        t=t->next;
+                }
+                h=h->next;
+
+
+        }
+        return temp;
+
+
+}
+struct slln *sort(struct slln *h)
+{
+        struct slln *temp;
+        int i,j,t,n;
+        n=len(h);
+        for(i=0;i<n;i++)
+        {
+                temp=h;
+                for(j=0;j<n-i-1;j++)
+                {
+                        if((temp->v)>(temp->next->v))
+                        {
+                                t=temp->v;
+                                temp->v=temp->next->v;
+                                temp->next->v=t;
+                                temp=temp->next;
+                        }
+                }
+        }
+
+        return h;
+}
+
+struct slln *insert(struct slln *h,int pos,struct slln *nn)
+{
+
+        int i,n,v;
+        struct slln *t;
+        //printf("enter value\n");
+        //scanf("%d",&v);
+        //nn=createnode(v);
+        //printf("enter position\n");
+        //scanf("%d",&pos);
+        t=h;
+        for(i=0;i<pos-2;i++)
+        {
+                t=t->next;
+        }
+        nn->next=t->next;
+        t->next=nn;
+        return h;
+}
+
+struct slln *insort(struct slln *h)
+{
+        int i,n,l,v,pos=1;
+        struct slln *t,*nn;
+        t=h;
+        printf("enter value\n");
+        scanf("%d",&n);
+        nn=createnode(n);
+        l=len(h);
+        for(i=0;i<l;i++)
+        {
+                v=t->v;
+                if(v>n)
+                {
+                        h=insert(h,pos,nn);
+                        break;
+                }
+                pos++;
+                t=t->next;
+        }
+  return h;
+}
+
+
+
+int main()
+{
+        struct slln *h,*h1,*nn;
+        int n,val,a;
+        printf("enter the number of values\n");
+        scanf("%d",&n);
+        h=createlist(n);
+        nn=createnode(2);
+        //print(h);
+        //printf("enter the value to delete\n");
+        //scanf("%d",&val);
+        h1=insort(h);
+        print(h1);
+}
