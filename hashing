@@ -1,0 +1,160 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct slln{
+        int v;
+        struct slln *next;
+        char name[10];
+};
+struct slln *createnode(int val)
+{
+        struct slln *h;
+        h=(struct slln*)malloc(sizeof(struct slln));
+        h->v=val;
+        h->next=NULL;
+
+        return h;
+}
+struct slln *createlist(int n)
+{
+     struct slln *h=NULL,*l,*nn;
+     int  v;
+     for(int i=0;i<n;i++)
+     {
+        printf("enter value");
+        scanf("%d",&v);
+        nn=createnode(v);
+        if(h==NULL)
+        {
+          h=nn;
+         }
+         else{
+         l->next=nn;
+         }
+         l=nn;
+     }
+     return h;
+}
+void print(struct slln *h)
+{
+        while(h!=NULL)
+        {
+                printf("%d->",h->v);
+                h=h->next;
+        }
+}
+void search(struct slln *h,int val)
+{      
+       int flag;
+        while(h!=NULL)
+        {
+                if(h->v==val)
+                {
+                        printf("value found");
+                        flag=1;
+                        break;
+                }
+                h=h->next;
+        }
+        if(flag==0)
+        {
+                printf("element not found\n");
+        }
+}
+void createhashtable()
+{
+        struct slln *h,*nn,*a[10],*t;
+        int k,x,x1,val;
+        for(int j=0;j<10;j++)
+        {
+                a[j]=NULL;
+                }
+
+
+        for(int i=0;i<5;i++)
+        {
+                printf("enter value");
+                scanf("%d",&x);
+                nn=createnode(x);
+                k=x%10;
+                if(a[k]==NULL)
+                {
+                        a[k]=nn;
+
+                }
+                else
+                {
+                        nn->next=a[k];
+                        a[k]=nn;
+                }
+
+        }
+        for(int m=0;m<5;m++)
+        {
+            printf("slot %d=",m);
+                print(a[m]);
+                printf("\n");
+        }
+        printf("enter the value to search\n");
+        scanf("%d",&val);
+        x1=val%10;
+//search(a[x1],val);
+
+
+}
+struct slln *linearprob()
+{
+        struct slln *h,*a[10],*l,*t,*nn;
+        int v,i,j,h1,h2,k,n;
+        for(i=0;i<10;i++)
+        {
+                a[i]=NULL;
+        }
+        for(i=0;i<10;i++)
+        {
+                printf("enter value\n");
+                scanf("%d",&v);
+                nn=createnode(v);
+                h1=v%10;
+                if(a[h1]==NULL)
+                {
+                        a[h1]=nn;
+                }
+                else
+                {
+                        int m=0;
+                        while(m<10)
+                        {
+                             h2=(h1+m)%10;
+                                if(a[h2]==NULL)
+                                {
+                                        a[h2]=nn;
+                                        break;
+                                }
+                                else{
+                                        m++;
+                                }
+                        }
+                }
+        }
+        for(j=0;j<10;j++)
+        {
+                printf("slot %d : ",j);
+                printf("%d",a[j]->v);
+                printf("\n");
+        }
+
+
+}
+int main()
+{
+        struct slln *h;
+        linearprob();
+}
+
+
+
+            
+
+                
+
+
