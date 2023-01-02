@@ -1,1 +1,81 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+int a[20],top=-1;
+void push(int v)
+{
+    if(top==19)
+    {
+        printf("stack full\n");
+    }
+    else{
+        top=top+1;
+        a[top]=v;
+    }
+}
+int pop()
+{
+    if(top==-1)
+    {
+        printf("stack empty\n");
+    }
+    else{
+        int t=a[top];
+        top=top-1;
+        return t;
+    }
+}
+
+void print()
+{
+    for(int i=top;i>=0;i--)
+    {
+        printf("%d",a[i]);
+    }
+}
+
+
+int main()
+{
+   char s[10],c;
+   int n1,n2,d;
+   printf("enter string\n");
+   scanf("%s",s);
+   for(int i=0;s[i]!='\0';i++)
+   {
+       c=s[i];
+       switch(c)
+       {
+           case '+':
+             n1=pop();
+             n2=pop();
+             push(n1+n2);
+             break;
+           case '*':
+              n1=pop();
+              n2=pop();
+              push(n1*n2);
+              break;
+           case '-':
+               n1=pop();
+              n2=pop();
+              push(n1-n2);
+              break;
+           case '/':
+                n1=pop();
+              n2=pop();
+              push(n1/n2);
+              break;
+           default:
+               d=(int)c-(int)'0';
+               push(d);
+             
+       }
+   }
+   print();
+   
+   
+   
+    
+}
 
