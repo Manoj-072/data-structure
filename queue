@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<stdlib.h>
+int que[20],f=-1,r=-1;
+void enque(int v)
+{
+    if(r==19)
+    {
+        printf("queue is full\n");
+    }
+    else{
+        r++;
+        que[r]=v;
+    }
+    if(f==-1)
+    {
+        f++;
+    }
+}
+int deque()
+{
+    int t;
+    if(f==-1 || f>r)
+    {
+        printf("queue is empty\n");
+    }
+    else{
+        
+        t=que[f];
+        f++;
+    }
+    return t;
+}
+void print()
+{
+    if(f==-1 || f>r)
+    {
+        printf("queue is empty\n");
+        return ;
+    }
+    for(int i=f;i<=r;i++)
+    {
+        printf("%d",que[i]);
+    }
+}
+int main()
+{
+    enque(5);
+    enque(6);
+    enque(7);
+    int j=deque();
+    
+    j=deque();
+    
+    j=deque();
+    
+    j=deque();
+    
+    print();
+}
