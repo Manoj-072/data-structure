@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int v;
+    struct node *next;
+};
+struct list{
+    struct node *h;
+};
+struct graph{
+    int v;
+    struct list *array;
+};
+struct node *createnode(int val)
+{
+    struct node *h;
+    h=(struct node*)malloc(sizeof(struct node));
+    h->v=val;
+    h->next=NULL;
+    return h; 
+}
+struct graph *creategraph(int val)
+{
+    struct graph *g;
+    g=(struct graph*)malloc(sizeof(struct graph));
+    g->v=val;
+    g->array=(struct list*)malloc(val*(sizeof(struct list)));
+    for(int i=0;i<val;i++)
+    {
+        g->array[i].h=NULL;
+    }
+    return g;
+}
+
+void edge(struct graph *g,int s,int d)
+{
+    struct node *nn,*t;
+    if(g->array[s].h==NULL)
+    {
+        nn=createnode(s);
+        g->array[s].h=nn;
+    }
+    nn=createnode(d);
+    t=g->array[s].h;
+    while(t->next!=NULL)
+    {
+        t=t->next;
+    }
+    t->next=nn;
+
+}
+void print(struct graph *g)
+
+{
+    struct node *t;
+    int v=g->v;
+    for(int i=0;i<v;i++)
+    {
+        t=g->array[i].h;
+        printf("node ");
+        while(t!=NULL)
+        {
+            
+            printf(" %d->",t->v);
+            t=t->next;
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    
+    struct graph *g;
+
+
+    g=creategraph(3);
+    edge(g,0,1);
+    edge(g,1,2);
+    edge(g,2,1);
+    print(g);
+    
+}
