@@ -8,23 +8,24 @@ struct node{
 struct node *createnode(int val)
 {
     struct node *h;
+    h=(struct node*)malloc(sizeof(struct node));
     h->v=val;
     h->r=NULL;
     h->l=NULL;
     return h;
 }
-struct node *add(struct node *root,int n)
+struct node *add(struct node *root,int t)
 {
     if(root==NULL)
     {
-        return createnode(n);
+        return createnode(t);
     }
-    else if(n<root->v)
+    else if(t < root->v)
     {
-        root->l=add(root->l,n);
+        root->l=add(root->l,t);
     }
     else{
-        root->r=add(root->r,n);
+        root->r=add(root->r,t);
     }
     return root;
 }
@@ -34,23 +35,14 @@ struct node *createtree()
     int n,s;
     printf("enter value\n");
     scanf("%d",&n);
-    if(root==NULL)
+    for(int i=0;i<n;i++)
     {
-        root=createnode(n);
+        printf("enter node value\n");
+        scanf("%d",&s);
+        root=add(root,s);
     }
     
-        printf("enter -1 to stop\n");
-        scanf("%d",&s);
-        while(s!=-1)
-        {
-            printf("enter value\n");
-            scanf("%d",&n);
-            root=add(root,n);
-            printf("-1 to stop\n");
-            scanf("%d",&s);
-        }
-    
-    
+    return root;
 }
 void print(struct node *root)
 {
@@ -63,7 +55,8 @@ void print(struct node *root)
 }
 int main()
 {
-    struct node *t;
-    t=createtree();
-    print(t);
+    struct node *r;
+    r=createtree();
+    int t;
+    print(r);
 }
