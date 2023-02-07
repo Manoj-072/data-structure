@@ -1,0 +1,49 @@
+ #include <stdio.h>
+#include <stdlib.h>
+
+int q[10], f = -1, r = -1, adj[10][10], visited[10]={0}, n;
+void enqueue(int v)
+{
+        if (f == -1)    f++;
+        q[++r] = v;
+}
+
+int dequeue()
+{
+        if (f == -1 || f > r)   return -1;
+        return q[f++];
+}
+void bfs(int v)
+{
+        if (!visited[v])
+                printf("%d\n", v);
+        visited[v] = 1;
+        for (int i = 0; i < n; ++i)
+        {
+                if (adj[v][i] == 1 && !visited[i])
+                {
+                        
+                        enqueue(i);
+                }
+        }
+        
+        int t = dequeue();
+        if (t >= 0)     bfs(t);
+}
+int main()
+{
+        printf("Enter no.of nodes: ");
+        scanf("%d", &n);
+        int i, j;
+        printf("Enter the edges of each node: ");
+        for (int i = 0; i < n; ++i)
+        {
+                printf("Node %d: ", i);
+                for (int j = 0; j < n; ++j)
+                        scanf("%d", &adj[i][j]);
+        }
+        int v;
+        printf("Enter starting node: ");
+        scanf("%d", &v);
+        bfs(v);
+}
