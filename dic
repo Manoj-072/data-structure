@@ -1,0 +1,126 @@
+#include<stdlib.h>
+#include<string.h>
+#include <stdio.h>
+
+struct dic{
+    char em[10];
+    char name[10];
+};
+struct node{
+    struct dic m;
+    struct node *next;
+};
+
+
+struct node *a[100];
+
+
+
+
+
+
+
+
+
+
+
+struct node  *createnode()
+{
+    struct dic b;
+    struct node *h;
+    h=(struct node*)malloc(sizeof(struct node));
+    printf("enter key\n");
+    scanf("%s",b.em);
+    h->m=b;
+    h->next=NULL;
+    return h;
+}
+
+
+ 
+
+    
+    
+
+struct node *update()
+{
+    struct node *t,*t2;
+    t=createnode();
+    char c;
+    c=t->m.em[0];
+    int d,x;
+    d=(int)c-(int)'0'-49;
+    x=d%100;
+    if(a[x]==NULL)
+    {
+        a[x]=t;
+    }
+    else{
+        while(a[x]!=NULL)
+        {
+            if(strcmp(t->m.em,a[x]->m.em)>0)
+            {
+                printf("hi\n");
+                a[x]->next=t;
+                break;
+            }
+            else if(strcmp(t->m.em,a[x]->m.em)<0)
+            {
+                printf("***");
+            }
+        }
+    }
+    t2=a[x];
+    return t2;
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+void print(struct node *h)
+{
+    while(h!=NULL)
+     {
+         printf("%s",h->m.em);
+         h=h->next;
+
+     }
+     }
+int main()
+{
+    struct node *t;
+    //printf("enter key");
+    t=update();
+    t=update();
+     print(t);   
+}
+****************************************************************************************************************************************************************
+
+
+while(a[x]!=NULL)
+        {
+            
+            
+            if(len(a[x])==1){
+                
+            }
+    
+            z=a[x]->next;
+            if(strcmp(t->m.em,a[x]->m.em)>0 && strcmp(t->m.em,z->m.em)<0)
+            {
+                t->next=z;
+                a[x]->next=t;
+            }
+            
+        }
