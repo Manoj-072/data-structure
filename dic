@@ -113,14 +113,24 @@ while(a[x]!=NULL)
             
             
             if(len(a[x])==1){
-                
+                if(strcmp(t->m.em,a[x]->m.em)>0)
+                {
+                    a[x]->next=t;
+                }
+                else{
+                    t->next=a[x];
+                    a[x]=t;
+                }
             }
+            else{
     
             z=a[x]->next;
             if(strcmp(t->m.em,a[x]->m.em)>0 && strcmp(t->m.em,z->m.em)<0)
             {
                 t->next=z;
                 a[x]->next=t;
+            }
+            
             }
             
         }
