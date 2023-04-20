@@ -14,8 +14,25 @@ struct node{
 
 struct node *a[100];
 
-
-
+struct node *last(struct node *h)
+{
+    
+    while(h->next!=NULL)
+    {
+        h=h->next;
+    }
+    return h;
+}
+int len(struct node *h)
+{
+    int c=0;
+    while(h!=NULL)
+    {
+        c++;
+        h=h->next;
+    }
+    return c;
+}
 
 
 
@@ -44,34 +61,61 @@ struct node  *createnode()
 
 struct node *update()
 {
-    struct node *t,*t2;
+    struct node *t,*t2,*h,*l,*z;
     t=createnode();
     char c;
     c=t->m.em[0];
     int d,x;
     d=(int)c-(int)'0'-49;
     x=d%100;
+    h=a[x];
     if(a[x]==NULL)
     {
         a[x]=t;
+        h=a[x];
     }
     else{
-        while(a[x]!=NULL)
-        {
-            if(strcmp(t->m.em,a[x]->m.em)>0)
+        l=last(a[x]);
+        
+        if(len(a[x])==1){
+            
+                if(strcmp(t->m.em,a[x]->m.em)>0)
+                {
+                    a[x]->next=t;
+                
+                }
+                else{
+                    t->next=a[x];
+                    a[x]=t;
+                    
+                }
+            }
+            
+else if(strcmp(t->m.em,l->m.em)>0)
             {
-                printf("hi\n");
+                
+                l->next=t;
+            }
+else{
+while(a[x]!=NULL)
+        {
+            
+    
+            z=a[x]->next;
+            if(strcmp(t->m.em,a[x]->m.em)>0 && strcmp(t->m.em,z->m.em)<0)
+            {
+                t->next=z;
                 a[x]->next=t;
                 break;
             }
-            else if(strcmp(t->m.em,a[x]->m.em)<0)
-            {
-                printf("***");
-            }
+            a[x]=a[x]->next;
+        
+            
         }
+}
     }
-    t2=a[x];
-    return t2;
+    t2=h;
+    return h;
 
     
 }
@@ -92,7 +136,7 @@ void print(struct node *h)
 {
     while(h!=NULL)
      {
-         printf("%s",h->m.em);
+         printf("%s->",h->m.em);
          h=h->next;
 
      }
@@ -103,34 +147,7 @@ int main()
     //printf("enter key");
     t=update();
     t=update();
+    t=update();
+    
      print(t);   
 }
-****************************************************************************************************************************************************************
-
-
-while(a[x]!=NULL)
-        {
-            
-            
-            if(len(a[x])==1){
-                if(strcmp(t->m.em,a[x]->m.em)>0)
-                {
-                    a[x]->next=t;
-                }
-                else{
-                    t->next=a[x];
-                    a[x]=t;
-                }
-            }
-            else{
-    
-            z=a[x]->next;
-            if(strcmp(t->m.em,a[x]->m.em)>0 && strcmp(t->m.em,z->m.em)<0)
-            {
-                t->next=z;
-                a[x]->next=t;
-            }
-            
-            }
-            
-        }
