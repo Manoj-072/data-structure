@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int v;
+    struct node *l;
+    struct node *r;
+};
+struct node *createnode(int val)
+{
+    struct node *h;
+    h=(struct node*)malloc(sizeof(struct node));
+    h->v=val;
+    h->r=NULL;
+    h->l=NULL;
+    return h;
+}
+struct node *add(struct node *root,int n)
+{
+    if(root==NULL)
+    {
+        return createnode(n);
+    }
+    else if(n<root->v){
+        root->l=add(root->l,n);
+    }
+    else{
+        root->r=add(root->r,n);
+    }
+    return root;
+}
+
+struct node *createtree()
+{
+    struct node *root=NULL;
+    int n,s;
+  
+    while(1)
+    {
+        printf("enter value\n");
+        scanf("%d",&n);
+        if(n==-1){
+            break;
+        }
+        root=add(root,n);
+        printf("-1 to stop\n");
+        
+    }
+    
+   return root; 
+}
+
+void printlr(struct node *h)
+{
+    printf("%d  ",h->l->v);
+    printf("%d  ",h->r->v);
+}
+    
+void print(struct node *root)
+{
+    printf("%d",root->v);
+      printf("\n");
+        printlr(root);
+        printf("\n");
+        printlr(root->l);
+        printlr(root->r);
+    
+}
+
+
+int main()
+{
+    struct node *t;
+    t=createtree();
+    print(t);
+}
