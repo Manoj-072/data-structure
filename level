@@ -49,27 +49,52 @@ struct node *createtree()
    return root; 
 }
 
-void printlr(struct node *h)
-{
-    printf("%d  ",h->l->v);
-    printf("%d  ",h->r->v);
-}
+int height(struct node* root) {
     
-void print(struct node *root)
-{
-    printf("%d",root->v);
-      printf("\n");
-        printlr(root);
+    if (!root)
+        return 0;
+    else {
+        int left_height = height(root->l);
+        int right_height = height(root->r);
+        if (left_height >= right_height)
+            return left_height + 1;
+        else
+            return right_height + 1;
+    }
+}
+
+void print_level(struct node * root, int level_no) {
+    
+    if (!root)
+        return;
+    if (level_no == 0) {
+        
+        printf("%d -> ", root->v);
+    }
+    else {
+        
+        print_level(root->l, level_no - 1);
+        print_level(root->r, level_no - 1);
+    }
+
+}
+
+void lo(struct node* root) {
+    if (!root)
+        return;
+    int h = height(root);
+    for (int i=0; i<h; i++) {
+        printf("Level %d: ", i);
+        print_level(root, i);
         printf("\n");
-        printlr(root->l);
-        printlr(root->r);
-    
-}
+    }
+   
+}  
 
 
 int main()
 {
     struct node *t;
     t=createtree();
-    print(t);
+    lo(t);
 }
